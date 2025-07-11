@@ -1,0 +1,13 @@
+package com.example.agent_module;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class AgentModuleApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(AgentModuleApplication.class, args);
+	}
+
+}
