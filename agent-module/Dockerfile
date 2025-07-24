@@ -1,14 +1,14 @@
-# Build stage
-FROM maven:3.8.3-openjdk-17 AS build
-WORKDIR /app
-COPY pom.xml .
-COPY src ./src
-RUN mvn clean package -DskipTests
+# Start from an OpenJDK image
+FROM eclipse-temurin:21-jdk
 
-# Runtime stage
-FROM eclipse-temurin:17-jdk-alpine
+# Set workdir
 WORKDIR /app
-COPY --from=build /app/target/*.jar app.jar
+
+# Copy the jar file (make sure to build jar before pushing to GitHub)
+COPY target/agent-module-0.0.1-SNAPSHOT.jar app.jar
+
+# Expose the port your app runs on
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","app.jar"]
 
+# Run the jar file
+ENTRYPOINT ["java", "-jar", "app.jar"]
